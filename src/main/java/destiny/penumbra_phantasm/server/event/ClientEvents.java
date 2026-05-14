@@ -152,15 +152,18 @@ public class ClientEvents {
 					pose.translate(greatDoor.greatDoorPos.getX(), greatDoor.greatDoorPos.getY(),
 							greatDoor.greatDoorPos.getZ());
 
-					int packedLight = LevelRenderer.getLightColor(level, greatDoor.greatDoorPos);
+					if (Minecraft.getInstance().level.isLoaded(greatDoor.greatDoorPos)) {
+						int packedLight = LevelRenderer.getLightColor(level, greatDoor.greatDoorPos);
 
-					if (renderShockwavePass) {
-						if (greatDoor.isOpen) {
-							GreatDoorRenderUtil.renderOpenGreatDoor(greatDoor, pose, buffer, packedLight, OverlayTexture.NO_OVERLAY);
-						} else {
-							GreatDoorRenderUtil.renderClosedGreatDoor(greatDoor, pose, buffer, packedLight, OverlayTexture.NO_OVERLAY);
+						if (renderShockwavePass) {
+							if (greatDoor.isOpen) {
+								GreatDoorRenderUtil.renderOpenGreatDoor(greatDoor, pose, buffer, packedLight, OverlayTexture.NO_OVERLAY);
+							} else {
+								GreatDoorRenderUtil.renderClosedGreatDoor(greatDoor, pose, buffer, packedLight, OverlayTexture.NO_OVERLAY);
+							}
 						}
 					}
+
 					pose.popPose();
 				}
 			});
